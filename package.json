@@ -1,0 +1,23 @@
+{
+  "name": "forestDataViz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "client": "cd client && yarn start",
+    "server": "nodemon server/app.js",
+    "dev": "concurrently --kill-others-on-fail \"yarn server\" \"yarn client\"",
+    "prettier-format": "prettier --config .prettierrc 'client/src/**/*.tsx' --write"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^6.2.0",
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "prettier": "^2.3.1"
+  }
+}

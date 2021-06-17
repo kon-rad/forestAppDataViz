@@ -1,0 +1,11 @@
+.Upload__icon {
+  cursor: pointer;
+}
+.Upload {
+  cursor: pointer;
+}
+.Upload__file {
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
+}
