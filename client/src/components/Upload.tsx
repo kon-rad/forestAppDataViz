@@ -22,7 +22,7 @@ const Upload = ({ setData }: Props) => {
       axios
         .post('/api/csv-data', filesArray[0])
         .then(function (response) {
-          // console.log(response);
+          console.log("response: ", response);
           setData(response.data);
         })
         .catch(function (error) {

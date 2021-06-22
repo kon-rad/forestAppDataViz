@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import Upload from './components/Upload';
 import Table from './components/Table';
+import D3Demo from './components/D3Demo';
 
 type A = string[];
 
@@ -21,6 +22,7 @@ function App() {
           <div className="main__panel">
             <p>Upload your Forest app Data</p>
             <Upload setData={setData} />
+            <D3Demo />
           </div>
         </div>
       )}
