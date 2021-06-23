@@ -1,0 +1,43 @@
+:root {
+  /* CSS HEX */
+  --terra-cotta: #ed6a5aff;
+  --pale-spring-bud: #f4f1bbff;
+  --opal: #9bc1bcff;
+  --alabaster: #e6ebe0ff;
+  --robin-egg-blue: #36c9c6ff;
+}
+
+
+.heading: {
+  display: flex;
+  align-items: center;
+}
+.title {
+  text-align: center;
+  margin: 40px 0 80px;
+  font-family: arial;
+  padding-bottom: 10px;
+  border-bottom: 1px solid gray;
+}
+.chart_container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  padding: 60px 40px;
+}
+.svg_container {
+  height: 500px; 
+  width: 800px;
+  position: relative;
+}
+.tooltip {
+  height: 58px;
+  width: 140px;
+  padding: 16px; 
+  font-family: arial;
+  display: flex;
+  align-items: center;
+}
+.bar {
+  opacity: 0.8;
+}
