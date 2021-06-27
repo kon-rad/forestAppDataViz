@@ -1,6 +1,6 @@
 
 import MaterialTable from "material-table";
-
+// https://github.com/mbrn/material-table
 type A = string[];
 
 type Props = {
