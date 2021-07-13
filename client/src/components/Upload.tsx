@@ -19,6 +19,7 @@ const Upload = ({ setData }: Props) => {
       filesArray.push(file);
     });
     if (filesArray.length > 0) {
+      // post first file in array
       axios
         .post('/api/csv-data', filesArray[0])
         .then(function (response) {

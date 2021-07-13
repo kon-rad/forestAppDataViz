@@ -1,10 +1,23 @@
 import express from 'express';
 import bodyParser from 'body-parser';
+import mongoose from 'mongoose';
 
 declare var path: any;
 
 const app = express();
 const port: any = process.env.PORT || 5000;
+
+mongoose.connect(
+  'mongodb://localhost:27017/data',
+  {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  },
+  () => {
+    console.log('connected to mongo db');
+  }
+);
 
 const fData: any = [];
 
