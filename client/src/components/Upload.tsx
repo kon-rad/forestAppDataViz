@@ -9,29 +9,23 @@ type Props = {
 };
 
 const Upload = ({ setData, userId }: Props) => {
-  const handleFileSelected = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const files = e.currentTarget.files;
+  const handleFileSelected = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.item(0);
+    const text = await file?.text();
 
-    const filesArray: File[] = [];
-    [].forEach.call(files, (file) => {
-      filesArray.push(file);
-    });
-    if (filesArray.length > 0) {
-      // post first file in array
-      const uploadData = {
-        userId,
-        data: filesArray[0]
-      };
-      axios
-        .post('/api/csv-data', uploadData)
-        .then(function (response) {
-          console.log('response: ', response);
-          setData(response.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
+    const uploadData = {
+      userId,
+      data: text
+    };
+    axios
+      .post('/api/csv-data', uploadData)
+      .then(function (response) {
+        console.log('response: ', response);
+        setData(response.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   return (

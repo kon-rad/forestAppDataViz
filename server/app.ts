@@ -14,25 +14,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 connect();
 
-app.get('/api/hello', (req: any, res: any) => {
-  res.send({ express: 'Hello From Express' });
-});
-
-app.post('/api/world', (req: any, res: any) => {
-  // tslint:disable-next-line:no-console
-  console.log(req.body);
-  res.send(
-    `I received your POST request. This is what you sent me: ${req.body.post}`
-  );
-});
 app.post('/api/csv-data', (req: any, res): any => {
   // tslint:disable-next-line:no-console
-  console.log(req.body);
-  const bodySplit = Object.keys(req.body.data)[0].split('\n');
-  bodySplit.forEach((row) => {
+  console.log(req.body, req.body.data);
+  if (!req.body.data) {
+    return;
+  }
+  const bodySplit = req.body.data.split('\n');
+  bodySplit.forEach((row: string) => {
     const rowArr = row.split(',');
     fData.push(rowArr);
   });
+  // tslint:disable-next-line:no-console
+  console.log('fData: ', fData);
   res.send(fData);
 });
 
