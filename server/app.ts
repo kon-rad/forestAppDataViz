@@ -1,28 +1,18 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import mongoose from 'mongoose';
+import { connect } from './database/database';
 
 declare var path: any;
 
 const app = express();
 const port: any = process.env.PORT || 5000;
 
-mongoose.connect(
-  'mongodb://localhost:27017/data',
-  {
-    useCreateIndex: true,
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  },
-  () => {
-    console.log('connected to mongo db');
-  }
-);
-
 const fData: any = [];
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+connect();
 
 app.get('/api/hello', (req: any, res: any) => {
   res.send({ express: 'Hello From Express' });
@@ -38,7 +28,7 @@ app.post('/api/world', (req: any, res: any) => {
 app.post('/api/csv-data', (req: any, res): any => {
   // tslint:disable-next-line:no-console
   console.log(req.body);
-  const bodySplit = Object.keys(req.body)[0].split('\n');
+  const bodySplit = Object.keys(req.body.data)[0].split('\n');
   bodySplit.forEach((row) => {
     const rowArr = row.split(',');
     fData.push(rowArr);

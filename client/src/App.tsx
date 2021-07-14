@@ -7,10 +7,10 @@ import D3Demo from './components/D3Demo';
 type A = string[];
 
 const renderDataTable = (data: any): any => {
-  return <Table data={data}/>;
-}
+  return <Table data={data} />;
+};
 
-function App() {
+function App({ userId }: { userId: string }) {
   const [data, setData] = useState<Array<A>>([]);
   return (
     <div className="App">
@@ -21,7 +21,7 @@ function App() {
         <div className="App__cont">
           <div className="main__panel">
             <p>Upload your Forest app Data</p>
-            <Upload setData={setData} />
+            <Upload userId={userId} setData={setData} />
             <D3Demo />
           </div>
         </div>
