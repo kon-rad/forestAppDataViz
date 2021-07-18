@@ -1,5 +1,6 @@
 import { Document, Model } from 'mongoose';
 export interface Tree {
+  userId: string;
   startTime: Date;
   endTime: Date;
   tag: string;

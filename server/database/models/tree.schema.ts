@@ -1,6 +1,7 @@
 import { Schema } from 'mongoose';
 
 const TreeSchema = new Schema({
+  userId: String,
   startTime: Date,
   endTime: Date,
   tag: String,

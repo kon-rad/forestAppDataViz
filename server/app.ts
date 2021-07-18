@@ -1,6 +1,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import { connect } from './database/database';
+import { TreeModel } from './database/models/tree.model';
 
 declare var path: any;
 
@@ -12,7 +13,7 @@ const fData: any = [];
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-connect();
+const db = connect();
 
 app.post('/api/csv-data', (req: any, res): any => {
   // tslint:disable-next-line:no-console
@@ -20,9 +21,20 @@ app.post('/api/csv-data', (req: any, res): any => {
   if (!req.body.data) {
     return;
   }
-  const bodySplit = req.body.data.split('\n');
+  const { userId, data } = req.body;
+  const bodySplit = data.split('\n');
   bodySplit.forEach((row: string) => {
     const rowArr = row.split(',');
+    // 2021-06-07T10:54:01.107-0500,2021-06-07T11:54:01.107-0500,Work,Planted in my chrome,Cedar,True
+    TreeModel.create({
+      userId,
+      startTime: rowArr[0],
+      endTime: rowArr[1],
+      tag: rowArr[2],
+      note: rowArr[3],
+      treeType: rowArr[4],
+      isSuccess: rowArr[5]
+    });
     fData.push(rowArr);
   });
   // tslint:disable-next-line:no-console
