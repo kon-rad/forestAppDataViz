@@ -3,27 +3,32 @@ import bodyParser from 'body-parser';
 import { connect } from './database/database';
 import { TreeModel } from './database/models/tree.model';
 
+// todos:
+// 1. fix response data
+// 1. confirm that data is written to db
+// 2. check if  userId  is in  db on load
+
 declare var path: any;
 
 const app = express();
 const port: any = process.env.PORT || 5000;
-
-const fData: any = [];
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const db = connect();
 
-app.post('/api/csv-data', (req: any, res): any => {
+app.post('/api/csv-data', (req: any, res: any): any => {
   // tslint:disable-next-line:no-console
-  console.log(req.body, req.body.data);
   if (!req.body.data) {
     return;
   }
+  // tslint:disable-next-line:no-console
+  console.log('req body data.data: ', req.body.data);
   const { userId, data } = req.body;
-  const bodySplit = data.split('\n');
-  bodySplit.forEach((row: string) => {
+  const dataArr = data.split('\n');
+  const fData: any = [];
+  dataArr.forEach((row: string) => {
     const rowArr = row.split(',');
     // 2021-06-07T10:54:01.107-0500,2021-06-07T11:54:01.107-0500,Work,Planted in my chrome,Cedar,True
     TreeModel.create({
@@ -53,4 +58,4 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // tslint:disable-next-line:no-console
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port, () => console.log(`Listening on port !!!!! ${port}`));

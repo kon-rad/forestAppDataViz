@@ -1,0 +1,1 @@
+{"version":3,"file":"tree.schema.js","sourceRoot":"","sources":["../../../server/database/models/tree.schema.ts"],"names":[],"mappings":";;AAAA,uCAAkC;AAElC,MAAM,UAAU,GAAG,IAAI,iBAAM,CAAC;IAC5B,MAAM,EAAE,MAAM;IACd,SAAS,EAAE,IAAI;IACf,OAAO,EAAE,IAAI;IACb,GAAG,EAAE,MAAM;IACX,IAAI,EAAE,MAAM;IACZ,QAAQ,EAAE,MAAM;IAChB,SAAS,EAAE,MAAM;CAClB,CAAC,CAAC;AAEH,kBAAe,UAAU,CAAC"}

@@ -5,27 +5,39 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const body_parser_1 = __importDefault(require("body-parser"));
+const database_1 = require("./database/database");
+const tree_model_1 = require("./database/models/tree.model");
 const app = express_1.default();
 const port = process.env.PORT || 5000;
-const fData = [];
 app.use(body_parser_1.default.json());
 app.use(body_parser_1.default.urlencoded({ extended: true }));
-app.get('/api/hello', (req, res) => {
-    res.send({ express: 'Hello From Express' });
-});
-app.post('/api/world', (req, res) => {
-    // tslint:disable-next-line:no-console
-    console.log(req.body);
-    res.send(`I received your POST request. This is what you sent me: ${req.body.post}`);
-});
+const db = database_1.connect();
 app.post('/api/csv-data', (req, res) => {
     // tslint:disable-next-line:no-console
-    console.log(req.body);
-    const bodySplit = Object.keys(req.body)[0].split('\n');
-    bodySplit.forEach((row) => {
+    if (!req.body.data) {
+        return;
+    }
+    // tslint:disable-next-line:no-console
+    console.log('req body data.data: ', req.body.data);
+    const { userId, data } = req.body;
+    const dataArr = data.split('\n');
+    const fData = [];
+    dataArr.forEach((row) => {
         const rowArr = row.split(',');
+        // 2021-06-07T10:54:01.107-0500,2021-06-07T11:54:01.107-0500,Work,Planted in my chrome,Cedar,True
+        tree_model_1.TreeModel.create({
+            userId,
+            startTime: rowArr[0],
+            endTime: rowArr[1],
+            tag: rowArr[2],
+            note: rowArr[3],
+            treeType: rowArr[4],
+            isSuccess: rowArr[5]
+        });
         fData.push(rowArr);
     });
+    // tslint:disable-next-line:no-console
+    console.log('fData: ', fData);
     res.send(fData);
 });
 if (process.env.NODE_ENV === 'production') {
@@ -37,5 +49,5 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 // tslint:disable-next-line:no-console
-app.listen(port, () => console.log(`Listening on port ${port}`));
+app.listen(port, () => console.log(`Listening on port !!!!! ${port}`));
 //# sourceMappingURL=app.js.map
