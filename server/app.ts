@@ -2,6 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import { connect } from './database/database';
 import { TreeModel } from './database/models/tree.model';
+import { Tree } from './database/models/tree.types';
 
 // todos:
 // 1. fix response data
@@ -47,6 +48,16 @@ app.post('/api/csv-data', (req: any, res: any): any => {
   res.send(fData);
 });
 
+app.get('/home', async (req: any, res: any): Promise<any> => {
+  console.log('home', req);
+  const { userId } = req.body;
+  const data: Array<Tree> = await TreeModel.find({ userId: userId });
+  console.log('home data: ', data);
+  res.send({
+    data: data
+  });
+});
+
 if (process.env.NODE_ENV === 'production') {
   // Serve any static files
   app.use(express.static(path.join(__dirname, 'client/build')));
@@ -58,4 +69,4 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // tslint:disable-next-line:no-console
-app.listen(port, () => console.log(`Listening on port !!!!! ${port}`));
+app.listen(port, () => console.log(`Listening on port! ${port}`));
